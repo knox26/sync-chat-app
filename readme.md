@@ -10,7 +10,9 @@ A real-time chat application that allows users to communicate with each other in
 - Multiple chat rooms
 - Private messaging
 - User authentication
+- Protected routes
 - Responsive design
+- File/Image sharing
 
 ## Technologies Used
 
