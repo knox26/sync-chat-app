@@ -24,7 +24,7 @@ export const signup = async (req, res, next) => {
     });
     await user.save();
     const token = createToken(user.email, user.id);
-   
+
     return res.status(201).json({
       user: {
         id: user.id,
@@ -59,7 +59,7 @@ export const login = async (req, res, next) => {
     }
 
     const token = createToken(user.email, user.id);
-   
+
     return res.status(201).json({
       user: {
         id: user.id,
@@ -102,7 +102,6 @@ export const updateProfile = async (req, res, next) => {
   try {
     const { userId } = req;
     const { firstName, lastName, color } = req.body;
-    console.log("From update profile function -->", req.body);
 
     if (!firstName || !lastName || !color) {
       return res

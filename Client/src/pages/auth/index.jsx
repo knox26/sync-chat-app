@@ -10,7 +10,6 @@ import { SIGNUP_ROUTE } from "../../../utils/constants.js";
 import { LOGIN_ROUTE } from "../../../utils/constants.js";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "@/store/index.js";
-import Cookies from "js-cookie";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -52,9 +51,6 @@ const Auth = () => {
   const handleLogin = async () => {
     if (validateLogin()) {
       const response = await apiClient.post(LOGIN_ROUTE, { email, password });
-      // {headers: {
-      //   Authorization: localStorage.getItem("jwtToken"),
-      // } }
 
       localStorage.setItem("jwtToken", response.data.jwtToken);
 

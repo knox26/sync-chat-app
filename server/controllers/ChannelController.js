@@ -4,9 +4,8 @@ import User from "../models/UserModel.js";
 
 export const createChannel = async (req, res, next) => {
   try {
-    console.log("heyyyyyyyyy--->", req.body);
     const { name, members } = req.body;
-    console.log("members hai bhai--->", members);
+
     const userId = req.userId;
     const admin = await User.findById(userId);
     if (!admin) {
@@ -33,9 +32,8 @@ export const createChannel = async (req, res, next) => {
 
 export const getUserChannels = async (req, res, next) => {
   try {
-    console.log("lalal bhai--->", req.userId);
     const userId = new mongoose.Types.ObjectId(req.userId); // Corrected usage of mongoose
-    console.log("userId hai bhai--->", userId);
+
     const channels = await Channel.find({
       $or: [{ admin: userId }, { members: userId }],
     }).sort({ updatedAt: -1 });

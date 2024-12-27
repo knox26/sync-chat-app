@@ -46,8 +46,6 @@ function MessageBar() {
   };
 
   const handleSendMessage = async () => {
-    console.log("sender id just after send click ---->:", userInfo.id);
-    console.log("selected chat type--->", selectedChatType);
     if (selectedChatType === "contact") {
       socket.emit("sendMessage", {
         sender: userInfo.id,
@@ -57,7 +55,7 @@ function MessageBar() {
         fileUrl: undefined,
       });
     } else if (selectedChatType === "channel") {
-      console.log("inside handle send message channels");
+      
       socket.emit("send-channel-message", {
         sender: userInfo.id,
         content: message,
@@ -111,7 +109,7 @@ function MessageBar() {
           }
         }
       }
-      console.log(file);
+      
     } catch (error) {
       setIsUploading(false);
       setFileUploadProgress(0);

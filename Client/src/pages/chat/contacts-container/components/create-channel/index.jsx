@@ -49,8 +49,6 @@ function CreateChannel() {
 
   const createChannel = async () => {
     try {
-      console.log("channelName hai bhai --->", channelName);
-      console.log("selectedContacts hai bhai --->", selectedContacts);
       if (channelName.length >= 0 && selectedContacts.length > 0) {
         const response = await apiClient.post(
           CREATE_CHANNEL_ROUTE,
