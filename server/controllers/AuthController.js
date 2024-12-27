@@ -60,7 +60,6 @@ export const login = async (req, res, next) => {
 
     res.cookie("jwt", createToken(user.email, user.id), {
       maxAge: maxAge,
-      
     });
     return res.status(201).json({
       user: {
@@ -103,6 +102,7 @@ export const updateProfile = async (req, res, next) => {
   try {
     const { userId } = req;
     const { firstName, lastName, color } = req.body;
+    console.log("From update profile function -->", req.body);
 
     if (!firstName || !lastName || !color) {
       return res
