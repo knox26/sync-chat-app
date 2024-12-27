@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -32,7 +31,6 @@ const userSchema = new mongoose.Schema({
     default: false,
   },
 });
-
 
 const User = mongoose.model("Users", userSchema);
 

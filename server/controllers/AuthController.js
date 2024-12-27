@@ -1,6 +1,6 @@
 import User from "../models/UserModel.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { renameSync, unlinkSync } from "fs";
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
@@ -24,9 +24,7 @@ export const signup = async (req, res, next) => {
     });
     await user.save();
     res.cookie("jwt", createToken(user.email, user._id), {
-      secure: true,
       maxAge: maxAge,
-      sameSite: "none",
     });
     return res.status(201).json({
       user: {
@@ -62,8 +60,6 @@ export const login = async (req, res, next) => {
 
     res.cookie("jwt", createToken(user.email, user.id), {
       maxAge: maxAge,
-      secure: true,
-      sameSite: "none",
     });
     return res.status(201).json({
       user: {
