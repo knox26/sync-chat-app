@@ -24,9 +24,7 @@ export const signup = async (req, res, next) => {
     });
     await user.save();
     const token = createToken(user.email, user.id);
-    // res.cookie("jwt", token, {
-    //   maxAge: maxAge,
-    // });
+   
     return res.status(201).json({
       user: {
         id: user.id,
@@ -34,7 +32,7 @@ export const signup = async (req, res, next) => {
 
         profileSetUp: user.profileSetUp,
       },
-      jwt: token,
+      jwtToken: token,
     });
   } catch (err) {
     return res.status(500).send("Internal Server Error");
@@ -61,9 +59,7 @@ export const login = async (req, res, next) => {
     }
 
     const token = createToken(user.email, user.id);
-    // res.cookie("jwt", token, {
-    //   maxAge: maxAge,
-    // });
+   
     return res.status(201).json({
       user: {
         id: user.id,
@@ -74,7 +70,7 @@ export const login = async (req, res, next) => {
         image: user.image,
         color: user.color,
       },
-      jwt: token,
+      jwtToken: token,
     });
   } catch (err) {
     return res.status(500).send("Internal Server Error");

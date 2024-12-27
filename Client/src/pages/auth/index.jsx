@@ -51,12 +51,12 @@ const Auth = () => {
 
   const handleLogin = async () => {
     if (validateLogin()) {
-      const response = await apiClient.post(
-        LOGIN_ROUTE,
-        { email, password },
-        { withCredentials: true }
-      );
-      Cookies.set("jwt", response.data.jwt, { expires: 3 });
+      const response = await apiClient.post(LOGIN_ROUTE, { email, password });
+      // {headers: {
+      //   Authorization: localStorage.getItem("jwtToken"),
+      // } }
+
+      localStorage.setItem("jwtToken", response.data.jwtToken);
 
       if (response.data.user.id) {
         setUserInfo(response.data.user);
@@ -76,7 +76,7 @@ const Auth = () => {
         { email, password },
         { withCredentials: true }
       );
-      Cookies.set("jwt", response.data.jwt, { expires: 3 });
+      localStorage.setItem("jwtToken", response.data.jwtToken);
       if (response.status === 201) {
         setUserInfo(response.data.user);
         navigate("/profile");

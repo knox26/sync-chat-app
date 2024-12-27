@@ -22,11 +22,8 @@ function ProfileInfo() {
   //logout function
   const logout = async () => {
     try {
-      const resopnse = await apiClient.post(
-        LOGOUT_ROUTE,
-        {},
-        { withCredentials: true }
-      );
+      const resopnse = await apiClient.post(LOGOUT_ROUTE);
+      localStorage.removeItem("jwtToken");
       if (resopnse.status === 201) {
         navigate("/auth");
         setUserInfo(null);
