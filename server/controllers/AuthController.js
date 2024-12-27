@@ -23,7 +23,8 @@ export const signup = async (req, res, next) => {
       password: hashedPassword,
     });
     await user.save();
-    res.cookie("jwt", createToken(user.email, user._id), {
+    const token = createToken(user.email, user.id);
+    res.cookie("jwt", token, {
       maxAge: maxAge,
     });
     return res.status(201).json({
@@ -33,6 +34,7 @@ export const signup = async (req, res, next) => {
 
         profileSetUp: user.profileSetUp,
       },
+      jwt: token,
     });
   } catch (err) {
     return res.status(500).send("Internal Server Error");
@@ -58,7 +60,8 @@ export const login = async (req, res, next) => {
       return res.status(404).send("Password is incorrect");
     }
 
-    res.cookie("jwt", createToken(user.email, user.id), {
+    const token = createToken(user.email, user.id);
+    res.cookie("jwt", token, {
       maxAge: maxAge,
     });
     return res.status(201).json({
@@ -71,6 +74,7 @@ export const login = async (req, res, next) => {
         image: user.image,
         color: user.color,
       },
+      jwt: token,
     });
   } catch (err) {
     return res.status(500).send("Internal Server Error");

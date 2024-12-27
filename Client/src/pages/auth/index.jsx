@@ -10,6 +10,7 @@ import { SIGNUP_ROUTE } from "../../../utils/constants.js";
 import { LOGIN_ROUTE } from "../../../utils/constants.js";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "@/store/index.js";
+import Cookies from "js-cookie";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -55,6 +56,7 @@ const Auth = () => {
         { email, password },
         { withCredentials: true }
       );
+      Cookies.set("jwt", response.data.jwt, { expires: 3 });
 
       if (response.data.user.id) {
         setUserInfo(response.data.user);
@@ -74,6 +76,7 @@ const Auth = () => {
         { email, password },
         { withCredentials: true }
       );
+      Cookies.set("jwt", response.data.jwt, { expires: 3 });
       if (response.status === 201) {
         setUserInfo(response.data.user);
         navigate("/profile");
